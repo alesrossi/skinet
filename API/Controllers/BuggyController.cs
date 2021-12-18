@@ -32,13 +32,13 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpGet("badrequest")]
+        [HttpGet("badrequestmethod")]
         public ActionResult GetBadRequest()
         {
             return BadRequest(new ApiResponse(400));
         }
 
-        [HttpGet("badrequest/{id}")]
+        [HttpGet("badrequestmethod/{id}")]
         public ActionResult GetNotFoundRequest(int id)
         {
             return Ok();
