@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "Core": {
+      "commandName": "Project"
+    },
+    "API": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\pc\\Documents\\ecommerce\\skinet\\API\\bin\\Debug\\net5.0\\API.exe",
+      "sqlDebugging": true,
+      "nativeDebugging": true
+    }
+  }
+}
