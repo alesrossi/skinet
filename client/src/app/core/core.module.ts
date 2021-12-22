@@ -8,6 +8,7 @@ import {BreadcrumbModule} from "xng-breadcrumb";
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
 import {ToastrModule} from "ngx-toastr";
+import {SharedModule} from "../shared/shared.module";
 
 
 
@@ -17,6 +18,7 @@ import {ToastrModule} from "ngx-toastr";
     CommonModule,
     RouterModule,
     BreadcrumbModule,
+    SharedModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-center',
       preventDuplicates: true
