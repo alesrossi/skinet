@@ -5,6 +5,7 @@ namespace Core.Entities.OrderAggregate
 {
     public class Order : BaseEntity
     {
+
         public Order()
         {
         }
@@ -26,7 +27,6 @@ namespace Core.Entities.OrderAggregate
         public decimal Subtotal { get; set; }
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
         public string PaymentIntentId { get; set; }
-
         public decimal GetTotal()
         {
             return Subtotal + DeliveryMethod.Price;
