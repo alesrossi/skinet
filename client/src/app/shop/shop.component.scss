@@ -1,6 +1,22 @@
-.clickable {
+.list-group-item {
   cursor: pointer;
-  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.1em;
+
+  &:focus {
+    outline: none;
+  }
+
+  &.active {
+    border-radius: 10px;
+  }
+
+  &:not(.active):hover {
+    border-radius: 10px;
+    color: white;
+    background-color: #55595c;
+  }
 }
 .active {
   color: whitesmoke;

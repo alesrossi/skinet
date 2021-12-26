@@ -6,3 +6,11 @@ export interface IPagination {
   count: number;
   data: IProduct[];
 }
+
+export class Pagination implements IPagination {
+  count: number;
+  data: IProduct[] = [];
+  pageIndex: number;
+  pageSize: number;
+
+}
