@@ -15,7 +15,9 @@
           <th># {{order.id}}</th>
           <td>{{order.orderDate | date: 'medium'}}</td>
           <td>{{order.total | currency: "EUR"}}</td>
-          <td>{{order.status}}</td>
+          <td [ngStyle]="{'color': (order.status === 'Payment Received') ? '#008000FF' : (order.status === 'Payment Failed') ? '#8B0000FF': '#55595c'}">
+            <strong>{{order.status}}</strong>
+          </td>
         </tr>
         </tbody>
       </table>
