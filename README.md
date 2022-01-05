@@ -5,6 +5,7 @@ To try this project you can visit this link: https://skinet.alessandrorossigamed
 
 # Technology Stack
 ![My tech stack](https://i.imgur.com/0UsSggl.png)
+
 For the backend I chose to work on dotnet as I consider myself to be proficient with C# and Entity Framework works really well with relationship databases.
 I used postgres as my main DB and Redis as a support for the basket (a basket is created for everyone, including clients who have not created an account) and for caching to speed up the application. Both of them are managed and installed using a [docker-compose file.](https://github.com/AlessandroRossi-unige/skinet/blob/master/docker-compose.yml)
 
@@ -14,7 +15,9 @@ To make it look better I chose Boostrap for its simplicity. For payments I use s
 ## Backend
 
 The main focus of this project was to create the foundation of an easily scalable project, to accomplish this I implemented the Unit of work and Repository patterns.
+
 ![Unit of work](https://www.asp.net/media/2578149/Windows-Live-Writer_8c4963ba1fa3_CE3B_Repository_pattern_diagram_1df790d3-bdf2-4c11-9098-946ddd9cd884.png)
+
 With these patterns I'm able to add generic entities with ease, while mantain the abstraction layer. This makes it convenient to switch DB, in fact at the start of the project I wsa using sqlite but I was able to switch to postgres for production.
 
 ## Frontend
