@@ -2,13 +2,11 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Infrastructure.Identity.Migrations
+#nullable disable
+
+namespace Infrastructure.Migrations.AppIdentityDb
 {
-<<<<<<< HEAD:Infrastructure/Identity/Migrations/20211226222224_Postgres Identity Initial.cs
-    public partial class PostgresIdentityInitial : Migration
-=======
-    public partial class PostgresIdentityinitial : Migration
->>>>>>> backup:Infrastructure/Identity/Migrations/20220104102439_Postgres Identity initial.cs
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

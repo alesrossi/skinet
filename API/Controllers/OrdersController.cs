@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Dtos;
 using API.Errors;
@@ -28,7 +29,7 @@ namespace API.Controllers
         {
             var email = HttpContext.User.RetrieveEmailFromPrincipal();
 
-            var address = _mapper.Map<AddressDto, Address>(orderDto.ShipToAddress);
+            var address = _mapper.Map<AddressDto, Address>(orderDto.ShipToAddress ?? throw new InvalidOperationException());
 
             var order = await _orderService.CreateOrderAsync(
                 email, orderDto.DeliveryMethodId, orderDto.BasketId, address);

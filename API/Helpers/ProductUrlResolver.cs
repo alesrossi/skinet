@@ -21,7 +21,7 @@ namespace API.Helpers
                 return _config["ApiUrl"] + source.PictureUrl;
             }
 
-            return null;
+            return null!;
         }
     }
 }

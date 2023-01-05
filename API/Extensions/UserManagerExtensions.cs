@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Core.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -12,14 +13,14 @@ namespace API.Extensions
         {
             var email = user.FindFirstValue(ClaimTypes.Email);
 
-            return await input.Users.Include(x => x.Address).SingleOrDefaultAsync(x => x.Email == email);
+            return await input.Users.Include(x => x.Address).SingleOrDefaultAsync(x => x.Email == email) ?? throw new InvalidOperationException();
         }
 
         public static async Task<AppUser> FindByEmailFromClaimsPrinciple(this UserManager<AppUser> input, ClaimsPrincipal user)
         {
             var email = user.FindFirstValue(ClaimTypes.Email);
 
-            return await input.Users.SingleOrDefaultAsync(x => x.Email == email);
+            return await input.Users.SingleOrDefaultAsync(x => x.Email == email) ?? throw new InvalidOperationException();
         }
     }
 }

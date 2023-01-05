@@ -2,9 +2,11 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace Infrastructure.Data.Migrations
+#nullable disable
+
+namespace Infrastructure.Migrations
 {
-    public partial class Postgresinitial : Migration
+    public partial class INitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -57,7 +59,7 @@ namespace Infrastructure.Data.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     BuyerEmail = table.Column<string>(type: "text", nullable: true),
-                    OrderDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ShipToAddress_FirstName = table.Column<string>(type: "text", nullable: true),
                     ShipToAddress_LastName = table.Column<string>(type: "text", nullable: true),
                     ShipToAddress_Street = table.Column<string>(type: "text", nullable: true),
@@ -76,8 +78,7 @@ namespace Infrastructure.Data.Migrations
                         name: "FK_Orders_DeliveryMethods_DeliveryMethodId",
                         column: x => x.DeliveryMethodId,
                         principalTable: "DeliveryMethods",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
