@@ -1,14 +1,36 @@
-<div class="d-flex justify-content-center mt-5 ">
-  <form class="card p-5 border-primary" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+<div class="d-flex justify-content-center mt-5">
+  <form
+    class="card p-5 border-primary"
+    [formGroup]="registerForm"
+    (ngSubmit)="onSubmit()"
+  >
     <h1 class="h3 mb-3 fw-normal"><strong>Please register</strong></h1>
-    <app-text-input formControlName="displayName" [label]="'Display Name'"></app-text-input>
-    <app-text-input formControlName="email" [label]="'Email Address'"></app-text-input>
-    <app-text-input formControlName="password" [label]="'Password'" [type]="'password'"></app-text-input>
+    <app-text-input
+      formControlName="displayName"
+      [label]="'Display Name'"
+    ></app-text-input>
+    <app-text-input
+      formControlName="email"
+      [label]="'Email Address'"
+    ></app-text-input>
+    <app-text-input
+      formControlName="password"
+      [label]="'Password'"
+      [type]="'password'"
+    ></app-text-input>
     <ul class="text-danger" *ngIf="errors">
       <li *ngFor="let error of errors">
-        {{error}}
+        {{ error }}
       </li>
     </ul>
-    <button [disabled]="registerForm.invalid" class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+    <div class="d-grid">
+      <button
+        [disabled]="registerForm.invalid"
+        class="w-100 btn btn-lg btn-primary"
+        type="submit"
+      >
+        Register
+      </button>
+    </div>
   </form>
 </div>

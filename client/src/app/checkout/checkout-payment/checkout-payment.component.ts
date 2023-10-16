@@ -1,23 +1,30 @@
-import {AfterViewInit, Component, ElementRef, Input, OnDestroy, ViewChild} from '@angular/core';
-import {UntypedFormGroup} from "@angular/forms";
-import {BasketService} from "../../basket/basket.service";
-import {CheckoutRoutingService} from "../checkout-routing.service";
-import {ToastrService} from "ngx-toastr";
-import {IBasket} from "../../shared/models/basket";
-import {NavigationExtras, Router} from "@angular/router";
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
+import { UntypedFormGroup } from '@angular/forms';
+import { BasketService } from '../../basket/basket.service';
+import { CheckoutRoutingService } from '../checkout-routing.service';
+import { ToastrService } from 'ngx-toastr';
+import { Basket } from '../../shared/models/basket';
+import { NavigationExtras, Router } from '@angular/router';
 
 declare var Stripe;
 
 @Component({
   selector: 'app-checkout-payment',
   templateUrl: './checkout-payment.component.html',
-  styleUrls: ['./checkout-payment.component.scss']
+  styleUrls: ['./checkout-payment.component.scss'],
 })
 export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
   @Input() checkoutForm: UntypedFormGroup;
-  @ViewChild('cardNumber', {static: true}) cardNumberElement: ElementRef;
-  @ViewChild('cardExpiry', {static: true}) cardExpiryElement: ElementRef;
-  @ViewChild('cardCvc', {static: true}) cardCvcElement: ElementRef;
+  @ViewChild('cardNumber', { static: true }) cardNumberElement: ElementRef;
+  @ViewChild('cardExpiry', { static: true }) cardExpiryElement: ElementRef;
+  @ViewChild('cardCvc', { static: true }) cardCvcElement: ElementRef;
   stripe: any;
   cardNumber: any;
   cardExpiry: any;
@@ -29,10 +36,17 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
   cardExpiryValid = false;
   cardCvcValid = false;
 
-  constructor(private basketService: BasketService, private checkoutService: CheckoutRoutingService, private toastr: ToastrService, private router: Router) { }
+  constructor(
+    private basketService: BasketService,
+    private checkoutService: CheckoutRoutingService,
+    private toastr: ToastrService,
+    private router: Router
+  ) {}
 
   ngAfterViewInit(): void {
-    this.stripe = Stripe('pk_test_51KAZKmJZPhkM96pO3RCCWUd76PPovg1OJMx5x4Bp8zfjfVXWAizeqG9EGAneeZKoep2Z5VEkJbMHp938TdNQF0OY00SBkMaSQn');
+    this.stripe = Stripe(
+      'pk_test_51KAZKmJZPhkM96pO3RCCWUd76PPovg1OJMx5x4Bp8zfjfVXWAizeqG9EGAneeZKoep2Z5VEkJbMHp938TdNQF0OY00SBkMaSQn'
+    );
     const elements = this.stripe.elements();
 
     this.cardNumber = elements.create('cardNumber');
@@ -83,7 +97,7 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
 
       if (paymentResult.paymentIntent) {
         this.basketService.deleteBasket(basket);
-        const navigationExtras: NavigationExtras = {state: createdOrder};
+        const navigationExtras: NavigationExtras = { state: createdOrder };
         this.router.navigate(['checkout/success'], navigationExtras);
       } else {
         this.toastr.error(paymentResult.error.message);
@@ -93,30 +107,31 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
       console.log(error);
       this.loading = false;
     }
-
   }
 
-  private async confirmPaymentWithStripe(basket: IBasket) {
+  private async confirmPaymentWithStripe(basket: Basket) {
     return this.stripe.confirmCardPayment(basket.clientSecret, {
-            payment_method: {
-            card: this.cardNumber,
-            billing_details: {
-              name: this.checkoutForm.get('paymentForm').get('nameOnCard').value
-           }
-        }
-    })
+      payment_method: {
+        card: this.cardNumber,
+        billing_details: {
+          name: this.checkoutForm.get('paymentForm').get('nameOnCard').value,
+        },
+      },
+    });
   }
 
-  private async createOrder(basket: IBasket) {
+  private async createOrder(basket: Basket) {
     const orderToCreate = this.getOrderToCreate(basket);
     return this.checkoutService.createOrder(orderToCreate).toPromise();
   }
 
-  private getOrderToCreate(basket: IBasket) {
+  private getOrderToCreate(basket: Basket) {
     return {
       basketId: basket.id,
-      deliveryMethodId: +this.checkoutForm.get('deliveryForm').get('deliveryMethod').value,
-      shipToAddress: this.checkoutForm.get('addressForm').value
+      deliveryMethodId: +this.checkoutForm
+        .get('deliveryForm')
+        .get('deliveryMethod').value,
+      shipToAddress: this.checkoutForm.get('addressForm').value,
     };
   }
 }

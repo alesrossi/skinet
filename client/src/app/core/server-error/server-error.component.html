@@ -1,8 +1,12 @@
 <div class="container mt-5">
-  <h4>Internal Server Error - refreshing the page will destroy the exception</h4>
+  <h4>
+    Internal Server Error - refreshing the page will destroy the exception
+  </h4>
   <ng-container *ngIf="error">
-    <h5 class="text-danger">Error: {{error.message}}</h5>
-    <p class="font-weight-bold">Note: if you are seeing this then Angular is probably not responsible</p>
+    <h5 class="text-danger">Error: {{ error.message }}</h5>
+    <p class="fw-bold">
+      Note: if you are seeing this then Angular is probably not responsible
+    </p>
     <p>What to do next?</p>
     <ol>
       <li>Open chrome dev tools</li>
@@ -12,7 +16,8 @@
       <li>Reproduce the error in postman</li>
     </ol>
     <p>Following is the stack trace - This is where you should look</p>
-    <code class="mt-5" style="background-color: whitesmoke">{{error.details}}</code>
+    <code class="mt-5" style="background-color: whitesmoke">{{
+      error.details
+    }}</code>
   </ng-container>
-
 </div>

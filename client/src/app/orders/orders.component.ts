@@ -1,27 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import {IOrder} from "../shared/models/order";
-import {OrdersService} from "./orders.service";
+import { Order } from '../shared/models/order';
+import { OrdersService } from './orders.service';
 
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.scss']
+  styleUrls: ['./orders.component.scss'],
 })
 export class OrdersComponent implements OnInit {
-  orders: IOrder[];
+  orders: Order[];
 
-  constructor(private orderService: OrdersService) { }
+  constructor(private orderService: OrdersService) {}
 
   ngOnInit(): void {
     this.getOrders();
   }
 
   getOrders() {
-    this.orderService.getOrdersForUser().subscribe((orders: IOrder[]) => {
-      console.log('orders:')
-      this.orders = orders;
-    }, error => {
-      console.log(error);
-    })
+    this.orderService.getOrdersForUser().subscribe(
+      (orders: Order[]) => {
+        console.log('orders:');
+        this.orders = orders;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

@@ -1,32 +1,32 @@
 import { Injectable } from '@angular/core';
-import {environment} from "../../environments/environment";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {of, ReplaySubject} from "rxjs";
-import {IUser} from "../shared/models/user";
-import {map} from "rxjs/operators";
-import {Router} from "@angular/router";
-import {IAddress} from "../shared/models/address";
+import { environment } from '../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { of, ReplaySubject } from 'rxjs';
+import { User } from '../shared/models/user';
+import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { Address } from '../shared/models/address';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AccountService {
   baseUrl = environment.apiUrl;
-  private currentUserSource = new ReplaySubject<IUser>(1);
+  private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {}
 
   loadCurrentUser(token: string) {
-    if (token === null){
+    if (token === null) {
       this.currentUserSource.next(null);
       return of(null);
     }
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', `Bearer ${token}`);
 
-    return this.http.get(this.baseUrl + 'account', {headers}).pipe(
-      map((user: IUser) => {
+    return this.http.get(this.baseUrl + 'account', { headers }).pipe(
+      map((user: User) => {
         if (user) {
           localStorage.setItem('token', user.token);
           this.currentUserSource.next(user);
@@ -37,8 +37,8 @@ export class AccountService {
 
   login(values: any) {
     return this.http.post(this.baseUrl + 'account/login', values).pipe(
-      map((user: IUser) => {
-        if (user){
+      map((user: User) => {
+        if (user) {
           localStorage.setItem('token', user.token);
           this.currentUserSource.next(user);
         }
@@ -48,13 +48,13 @@ export class AccountService {
 
   register(values: any) {
     return this.http.post(this.baseUrl + 'account/register', values).pipe(
-      map((user: IUser) => {
+      map((user: User) => {
         if (user) {
           localStorage.setItem('token', user.token);
           this.currentUserSource.next(user);
         }
       })
-    )
+    );
   }
 
   logout() {
@@ -68,10 +68,10 @@ export class AccountService {
   }
 
   getUserAddress() {
-    return this.http.get<IAddress>(this.baseUrl + 'account/address');
+    return this.http.get<Address>(this.baseUrl + 'account/address');
   }
 
-  updateUserAddress(address: IAddress) {
-    return this.http.put<IAddress>(this.baseUrl + 'account/address', address);
+  updateUserAddress(address: Address) {
+    return this.http.put<Address>(this.baseUrl + 'account/address', address);
   }
 }
