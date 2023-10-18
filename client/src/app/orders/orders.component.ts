@@ -8,7 +8,7 @@ import { OrdersService } from './orders.service';
   styleUrls: ['./orders.component.scss'],
 })
 export class OrdersComponent implements OnInit {
-  orders: Order[];
+  orders: Order[] = [];
 
   constructor(private orderService: OrdersService) {}
 
@@ -17,14 +17,8 @@ export class OrdersComponent implements OnInit {
   }
 
   getOrders() {
-    this.orderService.getOrdersForUser().subscribe(
-      (orders: Order[]) => {
-        console.log('orders:');
-        this.orders = orders;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.orderService.getOrdersForUser().subscribe({
+      next: (orders) => (this.orders = orders),
+    });
   }
 }

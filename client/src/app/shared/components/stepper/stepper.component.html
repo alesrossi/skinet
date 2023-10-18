@@ -11,7 +11,7 @@
       </button>
     </li>
   </ul>
-  <div>
+  <div *ngIf="selected">
     <ng-container [ngTemplateOutlet]="selected.content"></ng-container>
   </div>
 </div>

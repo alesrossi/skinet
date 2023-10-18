@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { AccountService } from '../../account/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { Address } from '../../shared/models/address';
@@ -10,7 +10,7 @@ import { Address } from '../../shared/models/address';
   styleUrls: ['./checkout-address.component.scss'],
 })
 export class CheckoutAddressComponent implements OnInit {
-  @Input() checkoutForm: UntypedFormGroup;
+  @Input() checkoutForm?: FormGroup;
 
   constructor(
     private accountService: AccountService,
@@ -21,16 +21,14 @@ export class CheckoutAddressComponent implements OnInit {
 
   saveUserAddress() {
     this.accountService
-      .updateUserAddress(this.checkoutForm.get('addressForm').value)
-      .subscribe(
-        (address: Address) => {
+      .updateUserAddress(this.checkoutForm?.get('addressForm')?.value)
+      .subscribe({
+        next: () => {
           this.toastr.success('Address saved');
-          this.checkoutForm.get('addressForm').reset(address);
+          this.checkoutForm
+            ?.get('addressForm')
+            ?.reset(this.checkoutForm?.get('addressForm')?.value);
         },
-        (error) => {
-          this.toastr.error(error.message);
-          console.log(error);
-        }
-      );
+      });
   }
 }

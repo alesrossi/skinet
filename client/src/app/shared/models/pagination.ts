@@ -8,8 +8,8 @@ export interface Pagination {
 }
 
 export class Pagination implements Pagination {
-  count: number;
+  count: number = 0;
   data: Product[] = [];
-  pageIndex: number;
-  pageSize: number;
+  pageIndex: number = 0;
+  pageSize: number = 0;
 }

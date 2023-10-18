@@ -8,13 +8,13 @@ import { BasketService } from '../../basket/basket.service';
   styleUrls: ['./product-item.component.scss'],
 })
 export class ProductItemComponent implements OnInit {
-  @Input() product: Product;
+  @Input() product?: Product;
 
   constructor(private basketService: BasketService) {}
 
   ngOnInit(): void {}
 
   addItemToBasket() {
-    this.basketService.addItemToBasket(this.product);
+    this.product && this.basketService.addItemToBasket(this.product);
   }
 }

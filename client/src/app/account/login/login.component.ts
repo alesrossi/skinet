@@ -1,36 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import {UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
-import {AccountService} from "../account.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AccountService } from '../account.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  loginForm: UntypedFormGroup;
+  loginForm = new FormGroup({
+    email: new FormControl('', [
+      Validators.required,
+      Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$'),
+    ]),
+    password: new FormControl('', Validators.required),
+  });
   returnUrl: string;
 
-  constructor(private accountService: AccountService, private router: Router, private activatedRoute: ActivatedRoute) { }
-
-  ngOnInit(): void {
-    this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl || '/shop';
-    this.createLoginForm();
+  constructor(
+    private accountService: AccountService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.returnUrl =
+      this.activatedRoute.snapshot.queryParams['returnUrl'] || '/shop';
   }
 
-  createLoginForm(){
-    this.loginForm = new UntypedFormGroup({
-      email: new UntypedFormControl('', [Validators.required, Validators.pattern('^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$')]),
-      password: new UntypedFormControl('', Validators.required)
-    });
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
-    this.accountService.login(this.loginForm.value).subscribe(() => {
-      this.router.navigateByUrl(this.returnUrl);
-    }, error => {
-      console.log(error);
-    })
+    this.accountService.login(this.loginForm.value).subscribe({
+      next: () => this.router.navigateByUrl(this.returnUrl),
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 }

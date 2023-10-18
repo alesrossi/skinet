@@ -72,16 +72,16 @@ export class ShopService {
         map((response) => {
           this.productCache.set(
             Object.values(this.shopParams).join('-'),
-            response.body.data
+            response.body!.data
           );
-          this.pagination = response.body;
+          this.pagination = response.body!;
           return this.pagination;
         })
       );
   }
 
   getProduct(id: number) {
-    let product: Product;
+    let product: Product | undefined;
     this.productCache.forEach((products: Product[]) => {
       product = products.find((p) => p.id === id);
     });

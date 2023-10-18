@@ -9,7 +9,7 @@ import { Basket, BasketItem } from '../../models/basket';
   styleUrls: ['./basket-summary.component.scss'],
 })
 export class BasketSummaryComponent {
-  basket$: Observable<Basket>;
+  basket$?: Observable<Basket>;
   @Output() addItem = new EventEmitter<BasketItem>();
   @Output() removeItem = new EventEmitter<{ id: number; quantity: number }>();
   @Input() isBasket = true;
