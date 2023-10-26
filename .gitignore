@@ -365,3 +365,5 @@ FodyWeavers.xsd
 *.db
 */settings.json
 appsettings.json
+./prod
+./API/wwwroot
