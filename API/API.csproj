@@ -19,6 +19,45 @@
   <ItemGroup>
       <Content Include="Content\**" CopyToPublishDirectory="PreserveNewest" />
 	  <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+	  <Content Remove="wwwroot\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="wwwroot\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="wwwroot\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\116.150d9087dd21551c.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\226.75c3d858d897c423.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\234.d0e31ac5d9d80576.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\3rdpartylicenses.txt" />
+    <_ContentIncludedByDefault Remove="wwwroot\49.238d9933ab68ee22.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\664.9027b9eb24b44612.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\images\hero1.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\images\hero2.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\images\hero3.jpg" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\images\logo.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\assets\images\placeholder.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\common.277a6d19cb2b0976.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\favicon.ico" />
+    <_ContentIncludedByDefault Remove="wwwroot\fontawesome-webfont.2b13baa7dd4f54c9.eot" />
+    <_ContentIncludedByDefault Remove="wwwroot\fontawesome-webfont.8a7cb27d142e3e19.ttf" />
+    <_ContentIncludedByDefault Remove="wwwroot\fontawesome-webfont.cf011583fb81df9f.woff" />
+    <_ContentIncludedByDefault Remove="wwwroot\fontawesome-webfont.da909aa098b0ee2d.svg" />
+    <_ContentIncludedByDefault Remove="wwwroot\fontawesome-webfont.e9955780856cf8aa.woff2" />
+    <_ContentIncludedByDefault Remove="wwwroot\index.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\main.5d07d6215a43e1ea.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\polyfills.2e93c34ccb8c8a2c.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\runtime.1d1ebbfc766edab4.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\styles.4eba82a2b31a640e.css" />
   </ItemGroup>
 
 </Project>
