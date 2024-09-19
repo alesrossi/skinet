@@ -40,3 +40,9 @@ label.xng-breadcrumb-trail {
   border-color: black;
   height: 3.125em;
 }
+
+/* Importing Bootstrap SCSS file. */
+@import "./node_modules/bootstrap/scss/bootstrap";
+
+/* Importing Datepicker SCSS file. */
+@import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
