@@ -1,6 +1,6 @@
 # Skinet! A simple Ecommerce website
 Skinet is my biggest project so far, a fullstack application for an commerce website.
-To try this project you can visit this link: https://skinet.alessandrorossigamedev.com/
+To try this project you can visit this link: https://skinet-sharp.alessandrorossi.tech/
 
 
 # Technology Stack
